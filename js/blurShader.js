@@ -1,23 +1,34 @@
 export const vertexShader = `
-out vec4 vPos;
+in vec2 textureCoord;
+out vec2 vUv;
+
 void main() {
-    vPos = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    gl_Position = vPos;
+    vUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
 `;
 
 export const fragmentShader = `
-in vec4 vPos;
+#include <packing>
 
-uniform vec3 color;
+in vec2 vUv;
+uniform sampler2D tDepth;
+uniform sampler2D tColor;
 uniform float minRenderDistance;
 uniform float maxRenderDistance;
 
 out vec4 fragColor;
-
+float readDepth( sampler2D depthSampler, vec2 coord ) {
+    float fragCoordZ = texture2D( depthSampler, coord ).x;
+    float viewZ = perspectiveDepthToViewZ( fragCoordZ, minRenderDistance, maxRenderDistance );
+    return viewZToOrthographicDepth( viewZ, minRenderDistance, maxRenderDistance );
+}
 void main() {
-    float linearstep = clamp((vPos.z - minRenderDistance) / (maxRenderDistance - minRenderDistance), 0.0, 1.0);
-    vec3 outColor = (1.0 - linearstep) * color;
-    fragColor = vec4(outColor, 1.0);
+    vec3 diffuse = texture2D(tColor, vUv).rgb;
+    float depth = readDepth( tDepth, vUv );
+
+    // fragColor.rgb = vec3(1.0 - depth);
+    fragColor.rgb = diffuse;
+    fragColor.a = 1.0;
 }
 `;
