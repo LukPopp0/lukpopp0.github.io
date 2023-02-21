@@ -1,53 +1,53 @@
 @import "../styles/variables.scss";
 
 #mystic-blur {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
 
   #mystic-blob-container {
-    z-index: -1;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 
     #mystic-blob {
-      height: 20vh;
       aspect-ratio: 1;
-      border-radius: 20vh;
-      background: linear-gradient(0deg, $accent-2, $accent-3);
-      animation: rotating 10s linear infinite, scaling 7.5s linear infinite;
+      height: 40vw;
+      border-radius: 100%;
+      background: linear-gradient(45deg, $accent-2, $accent-3);
+      animation: rotating 15s linear infinite, scaling 7.5s linear infinite;
     }
 
   }
 
-  #mystic-blur {
-    z-index: -1;
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  #blur-element {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
     backdrop-filter: blur(100px);
   }
 
   @keyframes rotating {
     from {
       rotate: 0deg;
-      scale: 1.2 1;
     }
 
     to {
       rotate: 360deg;
-      scale: 1.2 1;
     }
 
   }
 
   @keyframes scaling {
     0% {
-      scale: 1.2 1;
+      scale: 1.5 1;
     }
 
     50% {
@@ -55,7 +55,7 @@
     }
 
     100% {
-      scale: 1.2 1;
+      scale: 1.5 1;
     }
   }
 }
