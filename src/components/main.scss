@@ -1,5 +1,16 @@
 @import '../styles/variables.scss';
 
 .main {
-  text-transform: uppercase;
+  .page-part {
+    width: 80vw;
+    min-height: calc(100vh - 8rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 0;
+
+    &.socials {
+      min-height: 20vh;
+    }
+  }
 }
