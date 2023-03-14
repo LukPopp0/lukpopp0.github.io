@@ -1,0 +1,63 @@
+@import '../../styles/variables.scss';
+
+.socials-group {
+  width: 60%;
+  min-width: 250px;
+  max-width: 500px;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  // Styling the button
+  .social-button {
+    border-radius: 10rem;
+    padding: 0;
+
+
+    &.email {
+      &:hover {
+        border-color: $accent-3;
+      }
+    }
+
+    &.github {
+      &:hover {
+        border-color: $accent-2;
+      }
+    }
+
+    &.linkedin {
+      &:hover {
+        border-color: #2d87fd;
+      }
+    }
+  }
+
+  // Styling the icon
+  .logo {
+    width: 24px;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
+
+    &.email {
+      &:hover {
+        filter: drop-shadow(0 0 1em $accent-3-light);
+      }
+    }
+
+    &.github {
+      &:hover {
+        filter: drop-shadow(0 0 1em $accent-2-light);
+      }
+    }
+
+    &.linkedin {
+      &:hover {
+        filter: drop-shadow(0 0 1em #73a4ff);
+      }
+    }
+
+  }
+}
