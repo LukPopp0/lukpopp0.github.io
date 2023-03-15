@@ -1,5 +1,11 @@
 @import './styles/variables.scss';
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -14,6 +20,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  /* Scroll animation fixes */
+  animation-play-state: paused;
+  animation-delay: calc(var(--scroll) * -1s);
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
 }
 
 #root {
@@ -55,6 +67,10 @@ button {
   &:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
   }
+
+  img {
+    box-sizing: content-box;
+  }
 }
 
 
@@ -70,5 +86,9 @@ button {
 
   button {
     background-color: #f5f5f5;
+
+    a:has(img) {
+      filter: brightness(0.2);
+    }
   }
 }

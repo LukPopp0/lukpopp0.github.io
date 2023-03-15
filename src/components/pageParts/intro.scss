@@ -1,0 +1,5 @@
+.intro {
+  scale: calc(1 - var(--scroll));
+  filter: blur(calc(10px * var(--scroll)));
+  transition: scale 0.25s ease-out;
+}
