@@ -8,7 +8,7 @@ export const Socials = () => {
   return (
     <div className="socials-group">
       <div className="scl-icon-container">
-        <MagicButton className="social-button email" href="mailto:main@lukpopp.com">
+        <MagicButton className="social-button email" href="mailto:contact@lukpopp.com">
           <img src={emailLogo} className="logo email" alt="Email logo" />
         </MagicButton>
       </div>
