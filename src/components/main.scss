@@ -3,6 +3,7 @@
 .main {
   .page-part {
     width: 80vw;
+    max-width: $max-page-width;
     min-height: calc(100vh - 8rem);
     display: flex;
     flex-direction: column;
