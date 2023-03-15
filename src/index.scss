@@ -16,6 +16,13 @@
   -webkit-text-size-adjust: 100%;
 }
 
+#root {
+  max-width: $max-page-width;
+  margin: 0 auto;
+  padding: 0rem 2rem;
+  text-align: center;
+}
+
 body {
   margin: 0;
   display: flex;
