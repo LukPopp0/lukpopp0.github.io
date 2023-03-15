@@ -1,5 +1,11 @@
 @import './styles/variables.scss';
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -60,6 +66,10 @@ button {
   &:focus,
   &:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  img {
+    box-sizing: content-box;
   }
 }
 
