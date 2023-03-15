@@ -18,9 +18,11 @@
     #mystic-blob {
       aspect-ratio: 1;
       height: 40vw;
+      min-height: 20rem;
       border-radius: 100%;
       background: linear-gradient(45deg, $accent-2, $accent-3);
       animation: rotating 20s ease-in-out infinite, scaling 14s ease-in-out infinite;
+      filter: blur(3px);
     }
 
   }
@@ -32,6 +34,7 @@
     width: 100vw;
     height: 100vh;
     backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
   }
 
   @keyframes rotating {

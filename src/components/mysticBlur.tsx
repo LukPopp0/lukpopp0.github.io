@@ -8,12 +8,17 @@ export const MysticBlur = () => {
   // Add event listener to follow the cursor
   useEffect(() => {
     if (!mysticBlobContainer.current) return;
+    let anim: Animation | undefined = undefined;
 
-    document.body.onpointermove = ev => {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    document.body.onpointermove = (ev: PointerEvent) => {
       if (!mysticBlobContainer.current) return;
 
+      // Specifically tell the animation on Safari to commit the end styling state
+      if (isSafari && anim) anim.commitStyles();
+
       const { clientX, clientY } = ev;
-      mysticBlobContainer.current.animate(
+      anim = mysticBlobContainer.current.animate(
         { left: `${clientX}px`, top: `${clientY}px` },
         { duration: 2000, fill: 'forwards' }
       );
