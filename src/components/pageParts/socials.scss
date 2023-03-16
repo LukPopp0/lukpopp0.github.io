@@ -1,8 +1,9 @@
 @import '../../styles/variables.scss';
 
 .socials-group {
+  --logo-padding: 1.5rem;
   width: 60%;
-  min-width: 250px;
+  min-width: 350px;
   max-width: 500px;
   margin: auto;
   display: flex;
@@ -12,8 +13,10 @@
   // Styling the button
   .social-button {
     border-radius: 10rem;
+    border-width: 2px;
+    width: calc(24px + calc(2 * var(--logo-padding)));
+    height: calc(24px + calc(2 * var(--logo-padding)));
     padding: 0;
-
 
     &.email {
       &:hover {
@@ -29,15 +32,16 @@
 
     &.linkedin {
       &:hover {
-        border-color: #2d87fd;
+        border-color: #2d5efd;
       }
     }
   }
 
   // Styling the icon
   .logo {
-    width: 24px;
-    padding: 1.5em;
+    width: 28px;
+    height: 28px;
+    padding: var(--logo-padding);
     will-change: filter;
     transition: filter 300ms;
 
