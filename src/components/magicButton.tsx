@@ -19,7 +19,11 @@ export const MagicButton = (props: MagicButtonProps) => {
 
   const btn = (
     <button {...buttonProps} className={`magic-button ${buttonProps.className}`}>
-      {child}{' '}
+      <svg className="glow-container">
+        <rect pathLength="100" className="glow-blur"></rect>
+        <rect pathLength="100" className="glow-line"></rect>
+      </svg>
+      {child}
     </button>
   );
 
