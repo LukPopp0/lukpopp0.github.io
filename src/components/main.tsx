@@ -1,6 +1,7 @@
 import { Intro } from './pageParts/intro';
 import { Socials } from './pageParts/socials';
 import './main.scss';
+import { DownloadsSec } from './pageParts/downloadsSec';
 
 export const Main = () => {
   return (
@@ -11,7 +12,9 @@ export const Main = () => {
       {/* <div className="page-part cards-cntnr"></div> */}
       {/* <div className="page-part creative-cntnr-coding"></div> */}
       {/* <div className="page-part projects-cntnr"></div> */}
-      {/* <div className="page-part downloads-cntnr"></div> */}
+      <div className="page-part downloads-cntnr">
+        <DownloadsSec />
+      </div>
       <div className="page-part socials-cntnr">
         <Socials />
       </div>
