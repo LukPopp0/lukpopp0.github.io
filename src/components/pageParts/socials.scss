@@ -13,25 +13,30 @@
   // Styling the button
   .social-button {
     border-radius: 10rem;
-    border-width: 2px;
     width: calc(24px + calc(2 * var(--logo-padding)));
     height: calc(24px + calc(2 * var(--logo-padding)));
     padding: 0;
 
     &.email {
-      &:hover {
+
+      &:has(a:focus),
+      &:is(:hover, :focus) {
         border-color: $accent-3;
       }
     }
 
     &.github {
-      &:hover {
+
+      &:has(a:focus),
+      &:is(:hover, :focus) {
         border-color: $accent-2;
       }
     }
 
     &.linkedin {
-      &:hover {
+
+      &:has(a:focus),
+      &:is(:hover, :focus) {
         border-color: #2d5efd;
       }
     }
@@ -45,23 +50,20 @@
     will-change: filter;
     transition: filter 300ms;
 
-    &.email {
-      &:hover {
-        filter: drop-shadow(0 0 1em $accent-3-light);
-      }
+    &.email:hover {
+      filter: drop-shadow(0 0 1em $accent-3-light);
     }
 
-    &.github {
-      &:hover {
-        filter: drop-shadow(0 0 1em $accent-2-light);
-      }
+
+    &.github:hover {
+      filter: drop-shadow(0 0 1em $accent-2-light);
     }
 
-    &.linkedin {
-      &:hover {
-        filter: drop-shadow(0 0 1em #5e7eff);
-      }
+
+    &.linkedin:hover {
+      filter: drop-shadow(0 0 1em #5e7eff);
     }
+
 
   }
 }

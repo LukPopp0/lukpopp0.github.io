@@ -8,20 +8,12 @@ export const Socials = () => {
   return (
     <div className="socials-group">
       <div className="scl-icon-container">
-        <MagicButton
-          className="social-button email"
-          href="mailto:contact@lukpopp.com"
-          tabIndex={-1}
-        >
+        <MagicButton className="social-button email" href="mailto:contact@lukpopp.com">
           <img src={emailLogo} className="logo email" alt="Email logo" />
         </MagicButton>
       </div>
       <div className="scl-icon-container">
-        <MagicButton
-          className="social-button github"
-          href="https://github.com/LukPopp0"
-          tabIndex={-1}
-        >
+        <MagicButton className="social-button github" href="https://github.com/LukPopp0">
           <img src={githubLogo} className="logo github" alt="Github logo" />
         </MagicButton>
       </div>
@@ -29,7 +21,6 @@ export const Socials = () => {
         <MagicButton
           className="social-button linkedin"
           href="https://www.linkedin.com/in/luk-popp/"
-          tabIndex={-1}
         >
           <img src={linkedinLogo} className="logo linkedin" alt="LinkedIn logo" />
         </MagicButton>

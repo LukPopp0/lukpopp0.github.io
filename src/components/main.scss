@@ -10,8 +10,9 @@
     flex-direction: column;
     justify-content: center;
 
+    &.downloads-cntnr,
     &.socials-cntnr {
-      min-height: 20vh;
+      min-height: 260px;
     }
   }
 }
