@@ -1,8 +1,11 @@
 .magic-button {
-  --rounding: 2rem;
+  --rounding: 24px;
   --container-offset: 50px;
   --glow-line-width: 2px;
+  --glow-blur-width: 6px;
+  --glow-offset: 2px;
   border-radius: var(--rounding);
+  border-width: var(--glow-line-width);
   position: relative;
 
   a {
@@ -32,12 +35,11 @@
     .glow-blur,
     .glow-line {
       display: block;
-      width: calc(100% - var(--container-offset));
-      height: calc(100% - var(--container-offset));
+      width: calc(100% - var(--container-offset) + var(--glow-offset) + 0px);
+      height: calc(100% - var(--container-offset) + var(--glow-offset) + 0px);
       fill: transparent;
-      x: calc(var(--container-offset) / 2);
-      y: calc(var(--container-offset) / 2);
-      rx: var(--rounding);
+      x: calc((var(--container-offset) - var(--glow-offset)) / 2);
+      y: calc((var(--container-offset) - var(--glow-offset)) / 2);
       border-radius: var(--rounding);
       stroke: white;
       stroke-dasharray: 20 30;
@@ -47,8 +49,9 @@
 
 
     .glow-blur {
-      stroke-width: 6px;
-      filter: blur(6px);
+      stroke-width: var(--glow-blur-width);
+      filter: blur(var(--glow-blur-width));
+      -webkit-filter: blur(var(--glow-blur-width));
     }
 
     .glow-line {
