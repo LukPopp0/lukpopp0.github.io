@@ -48,7 +48,7 @@ jobs:
       - name: Generate the sitemap
         uses: cicirello/generate-sitemap@v1.9.1
         with:
-          root: dist
+          path-to-root: dist
           base-url-path: https://lukpopp.com
 
       #      - name: Test 🔍
