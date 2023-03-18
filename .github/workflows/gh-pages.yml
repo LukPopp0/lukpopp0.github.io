@@ -45,21 +45,12 @@ jobs:
         with:
           cmd: build
 
-      - name: Generate the sitemap
-        uses: cicirello/generate-sitemap@v1.9.1
-        with:
-          path-to-root: dist
-          base-url-path: https://lukpopp.com
+      - name: Copy sitemap
+        run: cp sitemap.xml dist
 
       #      - name: Test 🔍
       #        run: |
       #          npm test
-
-      - name: Output stats
-        run: |
-          echo "sitemap-path = ${{ steps.sitemap.outputs.sitemap-path }}"
-          echo "url-count = ${{ steps.sitemap.outputs.url-count }}"
-          echo "excluded-count = ${{ steps.sitemap.outputs.excluded-count }}"
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.1
