@@ -1,10 +1,9 @@
+import { BackgroundPlane } from './backgroundPlane';
+
 export const Scene = () => {
   return (
     <>
-      {/* <mesh>
-        <boxGeometry />
-        <meshBasicMaterial />
-      </mesh> */}
+      <BackgroundPlane />
     </>
   );
 };

@@ -11,7 +11,7 @@ export const Main = () => {
           <Intro />
         </div>
         {/* <div className="page-part cards-cntnr"></div> */}
-        {/* <div className="page-part creativity-cntnr"></div> */}
+        <div className="page-part creativity-cntnr" />
         {/* <div className="page-part projects-cntnr"></div> */}
         <div className="page-part downloads-cntnr">
           <DownloadsSec />
