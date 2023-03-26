@@ -1,18 +1,17 @@
 import './App.scss';
 import { Main } from './components/main';
-import { Header } from './components/header';
 import { Footer } from './components/footer';
 import { MysticBlur } from './components/mysticBlur';
-import { ScrollHandler } from './components/scrollHandler';
+import { Content as ScrollContent } from './components/content';
 
 const App = () => {
   return (
     <div className="App">
-      <Header />
-      <Main />
-      <Footer />
+      <ScrollContent>
+        <Main />
+      </ScrollContent>
       <MysticBlur />
-      <ScrollHandler />
+      <Footer />
     </div>
   );
 };
