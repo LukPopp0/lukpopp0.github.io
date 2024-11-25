@@ -15,7 +15,6 @@ export const Content = ({ children }: ContentProps) => {
       <Lighting />
       <PerspectiveCamera makeDefault position={[0, 0, 20]} />
       <ScrollControls pages={2.6}>
-        <Scene />
         <Scroll html>{children}</Scroll>
       </ScrollControls>
     </Canvas>

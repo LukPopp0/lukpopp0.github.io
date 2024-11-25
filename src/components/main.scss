@@ -1,4 +1,4 @@
-@import '../styles/variables.scss';
+@use '../styles/variables.scss';
 
 .main-container {
   display: flex;
@@ -7,14 +7,14 @@
   height: 100%;
 
   .main {
-    min-width: $min-page-width;
-    max-width: $max-page-width;
+    min-width: variables.$min-page-width;
+    max-width: variables.$max-page-width;
     margin: 0 auto;
     padding: 0rem 2rem;
 
     .page-part {
       width: 80vw;
-      max-width: $max-page-width;
+      max-width: variables.$max-page-width;
       min-height: 100vh;
       min-height: 100svh;
       padding: 4rem 0;
@@ -29,7 +29,7 @@
 
       &.creativity-cntnr {
         padding: 0;
-        background-color: #44ccc3;
+        // background-color: #44ccc3;
       }
     }
   }
