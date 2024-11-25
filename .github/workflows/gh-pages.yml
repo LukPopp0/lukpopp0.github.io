@@ -26,24 +26,23 @@ jobs:
 
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6.32.9
 
-      - name: Set Node.js 16.x 🔧
+      - name: Set Node.js 20.x 🔧
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
+          node-version: 20.x
+          cache: 'pnpm'
+      - name: Install Dependencies 📦
+        run: pnpm install --frozen-lockfile --immutable --immutable-cache --check-cache
 
-      - name: Install 🔧
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install --immutable --immutable-cache --check-cache
-
-      - name: Build 🔧
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build
+      - name: Build 🏗
+        run: pnpm build
 
       - name: Copy sitemap
         run: cp sitemap.xml dist
@@ -53,7 +52,7 @@ jobs:
       #          npm test
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4.6.9
         with:
           # creates hidden "gh-pages" branch from this to keep main clean
           folder: dist # build target of npm
