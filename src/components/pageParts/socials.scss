@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@use '../../styles/variables.scss';
 
 .socials-group {
   --logo-padding: 1.5rem;
@@ -21,7 +21,7 @@
 
       &:has(a:focus),
       &:is(:hover, :focus) {
-        border-color: $accent-3;
+        border-color: variables.$accent-3;
       }
     }
 
@@ -29,7 +29,7 @@
 
       &:has(a:focus),
       &:is(:hover, :focus) {
-        border-color: $accent-2;
+        border-color: variables.$accent-2;
       }
     }
 
@@ -51,12 +51,12 @@
     transition: filter 300ms;
 
     &.email:hover {
-      filter: drop-shadow(0 0 1em $accent-3-light);
+      filter: drop-shadow(0 0 1em variables.$accent-3-light);
     }
 
 
     &.github:hover {
-      filter: drop-shadow(0 0 1em $accent-2-light);
+      filter: drop-shadow(0 0 1em variables.$accent-2-light);
     }
 
 

@@ -1,18 +1,36 @@
-@import '../styles/variables.scss';
+@use '../styles/variables.scss';
 
-.main {
-  .page-part {
-    width: 80vw;
-    max-width: $max-page-width;
-    min-height: 100vh;
-    padding: 4rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.main-container {
+  display: flex;
+  place-content: center;
+  width: 100vw;
+  height: 100%;
 
-    &.downloads-cntnr,
-    &.socials-cntnr {
-      min-height: 260px;
+  .main {
+    min-width: variables.$min-page-width;
+    max-width: variables.$max-page-width;
+    margin: 0 auto;
+    padding: 0rem 2rem;
+
+    .page-part {
+      width: 80vw;
+      max-width: variables.$max-page-width;
+      min-height: 100vh;
+      min-height: 100svh;
+      padding: 4rem 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      &.downloads-cntnr,
+      &.socials-cntnr {
+        min-height: 260px;
+      }
+
+      &.creativity-cntnr {
+        padding: 0;
+        // background-color: #44ccc3;
+      }
     }
   }
 }
