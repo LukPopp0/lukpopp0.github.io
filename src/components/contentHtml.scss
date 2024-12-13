@@ -1,0 +1,32 @@
+@use '../styles/variables.scss';
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: variables.$min-page-width;
+  max-width: variables.$max-page-width;
+  margin: 0 auto;
+  padding: 0rem 2rem;
+
+  .page-part {
+    width: 80vw;
+    max-width: variables.$max-page-width;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 4rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &.downloads-cntnr,
+    &.socials-cntnr {
+      min-height: 260px;
+    }
+
+    &.creativity-cntnr {
+      padding: 0;
+      // background-color: #44ccc3;
+    }
+  }
+}

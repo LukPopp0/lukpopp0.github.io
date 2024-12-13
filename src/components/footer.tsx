@@ -13,7 +13,7 @@ export const Footer = () => {
         justifyContent: 'center',
       }}
     >
-      <div>Lukas Popp - Graphics Software Engineer</div>
+      <div>Lukas Popp - 3D Graphics Software Engineer</div>
     </footer>
   );
 };
