@@ -1,4 +1,4 @@
-$main-color: "#111111";
+$main-color: #111111;
 $main-color-inverse: #dedede;
 $accent-1: #213547;
 $accent-2: #df4b44;
@@ -11,5 +11,14 @@ $min-page-width: 320px;
 $max-page-width: 1280px;
 
 :export {
-  mainColor: $main-color
+  mainColor: $main-color;
+  mainColorInverse: $main-color-inverse;
+  accent1: $accent-1;
+  accent2: $accent-2;
+  accent3: $accent-3;
+  accentInverse1: $accent-1-light;
+  accentInverse2: $accent-2-light;
+  accentInverse3: $accent-3-light;
+  minPageWidth: $min-page-width;
+  maxPageWidth: $max-page-width;
 }

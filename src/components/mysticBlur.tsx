@@ -20,7 +20,7 @@ export const MysticBlur = () => {
       const { clientX, clientY } = ev;
       anim = mysticBlobContainer.current.animate(
         { left: `${clientX}px`, top: `${clientY}px` },
-        { duration: 2000, fill: 'forwards' }
+        { duration: 2000, fill: 'forwards' },
       );
     };
 
@@ -37,7 +37,7 @@ export const MysticBlur = () => {
     mysticBlob.current.style.transition = `border-radius ${animationDurationInMs}ms cubic-bezier(0.455, 0.03, 0.515, 0.955)`;
 
     const min = 20,
-      max = 50;
+      max = 60;
     const interval = setInterval(() => {
       if (!mysticBlob.current) return;
 
