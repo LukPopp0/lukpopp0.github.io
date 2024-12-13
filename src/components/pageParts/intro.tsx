@@ -1,34 +1,26 @@
-import { MysticBlur } from '../mysticBlur';
+import './intro.scss';
+import { useScroll } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 
 export const Intro = () => {
+  const intro = useRef<HTMLDivElement>(null);
+  const scroll = useScroll();
+
+  useFrame(() => {
+    if (!intro.current) return;
+    // intro.current.style.scale = `max(0.1, calc(1 - ${scroll.offset * scroll.pages}))`;
+    // intro.current.style.filter = `blur(calc(10px * ${scroll.offset * scroll.pages}))`;
+    // Skip perspective transformation for now
+    // intro.current.style.transform = `perspective(400px) rotate3d(1, 0, 0, clamp(-25deg, calc(${scroll.__damp.velocity_delta} * 360deg), 25deg))`;
+  });
+
   return (
     <>
-      <div className="intro" style={{ alignContent: 'center', justifyItems: 'center' }}>
-        <div>
-          <h1
-            style={{
-              letterSpacing: '1rem',
-              wordSpacing: '1rem',
-              fontFamily: 'Lato, Inter, Avenir, Helvetica, Arial',
-              fontWeight: 500,
-              fontSize: '5.25rem',
-              marginTop: 0,
-            }}
-          >
-            Lukas Popp
-          </h1>
-          <h2
-            style={{
-              letterSpacing: '0.8rem',
-              wordSpacing: '0.8rem',
-              fontFamily: 'Lato, Inter, Avenir, Helvetica, Arial',
-              fontWeight: 'lighter',
-              fontSize: '2rem',
-              margin: 0,
-            }}
-          >
-            Graphics Software Engineer
-          </h2>
+      <div ref={intro} className="intro">
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <h1>My name is Lukas Popp</h1>
+          <h2>Welcome to my portfolio!</h2>
         </div>
       </div>
       <MysticBlur />
