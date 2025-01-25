@@ -1,3 +1,38 @@
 .intro {
   transition: scale 0.25s ease-out, transform 0.25s ease-in-out;
+
+  .arrow-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    right: 0;
+  }
+
+  .arrow-background {
+    width: 100px;
+    height: 100px;
+    background: #00BCD4;
+    opacity: 0.5;
+    border-radius: 50%;
+    position: absolute;
+    animation: zoomIn 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes zoomIn {
+    0% {
+      opacity: 0;
+      transform: scale3d(.4, .4, .4);
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
 }

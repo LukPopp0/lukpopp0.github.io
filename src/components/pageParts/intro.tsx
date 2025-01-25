@@ -19,8 +19,13 @@ export const Intro = () => {
     <>
       <div ref={intro} className="intro">
         <div style={{ position: 'relative', zIndex: 1 }}>
-          <h1>My name is Lukas Popp</h1>
           <h2>Welcome to my portfolio!</h2>
+          {/* <div className="arrow-container"> */}
+          {/* <div className="arrow-2">
+              <i className="fa fa-angle-down"></i>
+            </div> */}
+          <div className="arrow-background"></div>
+          {/* </div> */}
         </div>
       </div>
     </>
