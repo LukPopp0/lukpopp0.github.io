@@ -1,12 +1,13 @@
 import { useScroll } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
-import { BackSide, Mesh } from 'three';
-import { cssVariables } from '../../constants/cssVariables';
+import { DoubleSide, Mesh } from 'three';
+import { useTheme } from '../../utils';
 
 export const BackgroundPlane = () => {
   const scroll = useScroll();
   const backgroundPlane = useRef<Mesh>(null);
+  const theme = useTheme();
 
   // Update opacity of background plane. If scrolled down more than the first page,
   // the plane is fully visible.
@@ -25,8 +26,8 @@ export const BackgroundPlane = () => {
 
   return (
     <mesh ref={backgroundPlane} position={[0, 0, 0]}>
-      <boxGeometry args={[1000, 1000, 1000]} />
-      <meshBasicMaterial side={BackSide} transparent color={cssVariables.mainColor} />
+      <boxGeometry args={[200, 1000, 1000]} />
+      <meshBasicMaterial side={DoubleSide} transparent color={theme.mainColor} />
     </mesh>
   );
 };

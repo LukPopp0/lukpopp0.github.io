@@ -1,17 +1,39 @@
 import './App.scss';
-import { Main } from './components/main';
 import { Footer } from './components/footer';
-import { MysticBlur } from './components/mysticBlur';
-import { Content as ScrollContent } from './components/content';
+import { ThemeProvider } from './utils';
+import { Intro } from './components/pageParts/intro';
+import { ProjectsPage } from './components/pageParts/projectsPage';
+import { Socials } from './components/pageParts/socials';
+import { HTMLAttributes, ReactElement } from 'react';
+
+const PagePart = ({
+  children,
+  ...props
+}: { children: ReactElement } & HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <div {...props} className={`page-part ${props.className}`}>
+      {children}
+    </div>
+  );
+};
 
 const App = () => {
   return (
     <div className="App">
-      <ScrollContent>
-        <Main />
-      </ScrollContent>
-      <MysticBlur />
-      <Footer />
+      <ThemeProvider>
+        <div className="main">
+          <PagePart className="intro-cntnr">
+            <Intro />
+          </PagePart>
+          <PagePart className="projects-cntnr">
+            <ProjectsPage />
+          </PagePart>
+          <PagePart className="socials-cntnr">
+            <Socials />
+          </PagePart>
+        </div>
+        <Footer />
+      </ThemeProvider>
     </div>
   );
 };
