@@ -7,7 +7,8 @@ export const Intro = () => {
         <div>
           <h1
             style={{
-              letterSpacing: '1rem',
+              letterSpacing: '2rem',
+              textIndent: '2rem',
               wordSpacing: '1rem',
               fontFamily: 'Lato, Inter, Avenir, Helvetica, Arial',
               fontWeight: 500,
