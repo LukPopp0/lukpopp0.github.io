@@ -1,33 +1,37 @@
 import './App.scss';
 import { Footer } from './components/footer';
-import { MysticBlur } from './components/mysticBlur';
-import { Content3d } from './components/content3d';
-import { Canvas } from '@react-three/fiber';
-import { Lighting } from './components/scene/lighting';
-import { PerspectiveCamera, Scroll, ScrollControls } from '@react-three/drei';
-import { NoToneMapping } from 'three';
-import { ContentHtml } from './components/contentHtml';
 import { ThemeProvider } from './utils';
+import { Intro } from './components/pageParts/intro';
+import { ProjectsPage } from './components/pageParts/projectsPage';
+import { Socials } from './components/pageParts/socials';
+import { HTMLAttributes, ReactElement } from 'react';
+
+const PagePart = ({
+  children,
+  ...props
+}: { children: ReactElement } & HTMLAttributes<HTMLDivElement>) => {
+  return (
+    <div {...props} className={`page-part ${props.className}`}>
+      {children}
+    </div>
+  );
+};
 
 const App = () => {
   return (
     <div className="App">
       <ThemeProvider>
-        <div className="main-container">
-          <Canvas frameloop="demand" gl={{ antialias: true, toneMapping: NoToneMapping }}>
-            <Lighting />
-            <PerspectiveCamera makeDefault position={[0, 0, 20]} />
-            <ScrollControls pages={2.6}>
-              <Scroll html style={{ width: '100%' }}>
-                <ContentHtml />
-              </Scroll>
-              <Scroll>
-                <Content3d />
-              </Scroll>
-            </ScrollControls>
-          </Canvas>
+        <div className="main">
+          <PagePart className="intro-cntnr">
+            <Intro />
+          </PagePart>
+          <PagePart className="projects-cntnr">
+            <ProjectsPage />
+          </PagePart>
+          <PagePart className="socials-cntnr">
+            <Socials />
+          </PagePart>
         </div>
-        <MysticBlur />
         <Footer />
       </ThemeProvider>
     </div>
