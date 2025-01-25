@@ -16,9 +16,47 @@
   color: #888;
 }
 
-.main-container {
+.main {
   display: flex;
-  place-content: center;
-  width: 100vw;
-  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  min-width: variables.$min-page-width;
+
+  .page-part {
+    width: 100vw;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 4rem 0rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+
+    &.intro-cntnr,
+    &.socials-cntnr {
+      max-width: variables.$max-page-width;
+      width: 80vw;
+    }
+
+    &.projects-cntnr {
+      background-color: variables.$main-color;
+
+      // TODO: Think about adding something before
+      // &::before {
+      //   content: '';
+      //   background-color: variables.$main-color;
+      //   position: relative;
+      //   top: -4.5rem;
+      //   border-top: 2px solid;
+      //   border-radius: 0.5rem 0.5rem 0 0;
+      //   width: 100vw;
+      //   height: 0.5rem;
+      // }
+    }
+
+    // &.socials-cntnr {
+    //   min-height: 260px;
+    // }
+  }
 }
