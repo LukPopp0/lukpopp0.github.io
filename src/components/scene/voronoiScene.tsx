@@ -3,7 +3,7 @@ import { InnerCube } from './innerCube';
 import { VoroPart } from './voroPart';
 import { useTheme } from '../../utils';
 import partPositions from '../../assets/models/cellPositions.json' with { type: 'json' };
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Group, Mesh, MeshStandardMaterial, Vector3 } from 'three';
 
 const voroFiles = new Array(14)
@@ -20,6 +20,7 @@ export const VoronoiScene = () => {
 
   const [voroActive, setVoroActive] = useState<boolean[]>(new Array(14).fill(false));
   const [hovering, setHovering] = useState<boolean>(false);
+  const [inView, setInView] = useState<boolean>(false);
 
   const colorPart = useCallback((part: Mesh, color: string) => {
     if (!part || !part.isMesh) return;
@@ -55,6 +56,19 @@ export const VoronoiScene = () => {
     }
   });
 
+  useEffect(() => {
+    // TODO: Find a better way to get the element
+    // TODO: Determine a better threshold?
+    const mainElement = document.getElementsByClassName('main')[0];
+    const updateInView = () => {
+      if (mainElement.scrollTop < window.innerHeight * 0.8 || mainElement.scrollTop > window.innerHeight * 1.4) {
+        setInView(false);
+      } else setInView(true);
+    };
+    mainElement.addEventListener('scroll', updateInView);
+    return () => mainElement.removeEventListener('scroll', updateInView);
+  }, []);
+
   return (
     <group ref={voroGroup}>
       <InnerCube size={12.5} />
@@ -62,7 +76,7 @@ export const VoronoiScene = () => {
         <VoroPart
           url={f}
           active={voroActive[i]}
-          inView={true}
+          inView={inView}
           key={i}
           userData={{ partNr: i }}
           position={new Vector3(partPositions[i][0], partPositions[i][1], partPositions[i][2])}
