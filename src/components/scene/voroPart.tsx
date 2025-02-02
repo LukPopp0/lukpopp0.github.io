@@ -4,8 +4,8 @@ import { useRef, useState } from 'react';
 import { Group, Vector3 } from 'three';
 import { UrlMesh } from './urlMesh';
 
-const activeScale = 1.25;
-const inactiveScale = 1.06;
+const activeScale = 1.3;
+const inactiveScale = 1.07;
 
 export const VoroPart = ({
   url,

@@ -1,4 +1,4 @@
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useThree } from '@react-three/fiber';
 import { Lighting } from '../scene/lighting';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { VoronoiScene } from '../scene/voronoiScene';
@@ -19,18 +19,43 @@ const SkyBox = () => {
   );
 };
 
-export const ProjectsPage = () => {
-  const cam = useRef<PCamera>(null);
+const Content = () => {
   const theme = useTheme();
+  const { camera } = useThree();
   const [autoRotate, setAutoRotate] = useState(true);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!cam.current) return;
+    camera.lookAt(new Vector3(0, 0, 0));
+  }, [camera]);
 
-    cam.current.lookAt(new Vector3(0, 0, 0));
-  }, [cam]);
+  return (
+    <>
+      <SkyBox />
+      {/* <Stats /> */}
+      <color attach="background" args={[theme.mainColor]} />
+      <Lighting />
+      <PerspectiveCamera makeDefault position={isBrowser ? [10, 20, 38] : [15, 30, 57]} />
+      {isBrowser && (
+        <OrbitControls
+          enabled={true}
+          enableRotate={isBrowser}
+          enableZoom={false}
+          enablePan={false}
+          autoRotate={autoRotate}
+        />
+      )}
+      <VoronoiScene />
+      <EffectComposer>
+        <>
+          <Bloom luminanceThreshold={0} luminanceSmoothing={0.8} height={400} />
+          {isBrowser && <N8AO halfRes color="black" aoRadius={2} intensity={1} aoSamples={6} denoiseSamples={4} />}
+        </>
+      </EffectComposer>
+    </>
+  );
+};
 
+export const ProjectsPage = () => {
   return (
     <div
       style={{
@@ -39,20 +64,8 @@ export const ProjectsPage = () => {
         position: 'relative',
       }}
     >
-      <Canvas ref={canvasRef}>
-        <SkyBox />
-        {/* <Stats /> */}
-        <color attach="background" args={[theme.mainColor]} />
-        <Lighting />
-        <PerspectiveCamera ref={cam} makeDefault position={[10, 20, -38]} />
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate={autoRotate} />
-        <VoronoiScene />
-        <EffectComposer>
-          <>
-            <Bloom luminanceThreshold={0} luminanceSmoothing={0.8} height={400} />
-            {isBrowser && <N8AO halfRes color="black" aoRadius={2} intensity={1} aoSamples={6} denoiseSamples={4} />}
-          </>
-        </EffectComposer>
+      <Canvas>
+        <Content />
       </Canvas>
     </div>
   );
