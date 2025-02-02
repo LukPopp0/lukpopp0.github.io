@@ -1,45 +1,41 @@
-import { MeshProps } from '@react-three/fiber';
-import { ReactElement, useEffect, useState } from 'react';
-import { BufferGeometry } from 'three';
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
+import { GroupProps } from '@react-three/fiber';
+import { animated, useSpring } from '@react-spring/three';
+import { useRef, useState } from 'react';
+import { Group, Vector3 } from 'three';
+import { UrlMesh } from './urlMesh';
 
-const baseColor = '#949494';
-const highlightColor = '#f8a0a8';
+const activeScale = 1.25;
+const inactiveScale = 1.06;
 
-export const UrlMesh = ({
+export const VoroPart = ({
   url,
+  active,
+  inView,
+  position: initPosition,
   children,
   ...props
-}: { url: string; children?: ReactElement } & MeshProps) => {
-  const [geometry, setGeometry] = useState<BufferGeometry | null>(null);
-  const [color, setColor] = useState<string>(baseColor);
-
-  useEffect(() => {
-    const stlLoader = new STLLoader();
-    stlLoader.load(
-      url,
-      data => setGeometry(data),
-      () => {},
-      error => console.error('Error loading model: ', error),
-    );
-  }, []);
+}: { url: string; active: boolean; inView: boolean } & GroupProps) => {
+  const group = useRef<Group>(null);
+  const [clicked, setClicked] = useState(false);
+  const positionClone: Vector3 = typeof initPosition === 'object' ? (initPosition as Vector3).clone() : new Vector3();
+  const { position } = useSpring<{ position: [number, number, number] }>({
+    position: !inView
+      ? [positionClone.x, positionClone.y, positionClone.z]
+      : active
+        ? [positionClone.x * activeScale, positionClone.y * activeScale, positionClone.z * activeScale]
+        : [positionClone.x * inactiveScale, positionClone.y * inactiveScale, positionClone.z * inactiveScale],
+    config: {
+      tension: 200,
+      friction: 12,
+      mass: 1,
+    },
+  });
 
   return (
-    geometry && (
-      <mesh
-        geometry={geometry}
-        onPointerOver={() => {
-          setColor(() => highlightColor);
-        }}
-        onPointerOut={() => {
-          setColor(() => baseColor);
-        }}
-        {...props}
-      >
-        <meshStandardMaterial color={color} />
-
+    <animated.group ref={group} position={position} {...props} onClick={() => setClicked(!clicked)}>
+      <UrlMesh url={url} userData={{ type: 'voro-part', url }}>
         {children}
-      </mesh>
-    )
+      </UrlMesh>
+    </animated.group>
   );
 };

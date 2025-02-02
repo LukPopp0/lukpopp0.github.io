@@ -3,37 +3,43 @@ import { cssVariables } from '../cssVariables';
 
 export type Theme = {
   mainColor: string;
+  mainColorAlt: string;
   mainColorInverse: string;
+  mainColorInverseAlt: string;
   accent1: string;
   accent2: string;
   accent3: string;
-  accentInverse1: string;
-  accentInverse2: string;
-  accentInverse3: string;
+  accent1Light: string;
+  accent2Light: string;
+  accent3Light: string;
 };
 
 const getTheme = (prefersDark: boolean): Theme => {
   if (prefersDark) {
     return {
       mainColor: cssVariables.mainColor,
+      mainColorAlt: cssVariables.mainColorAlt,
       mainColorInverse: cssVariables.mainColorInverse,
+      mainColorInverseAlt: cssVariables.mainColorInverseAlt,
       accent1: cssVariables.accent1,
       accent2: cssVariables.accent2,
       accent3: cssVariables.accent3,
-      accentInverse1: cssVariables.accentInverse1,
-      accentInverse2: cssVariables.accentInverse2,
-      accentInverse3: cssVariables.accentInverse3,
+      accent1Light: cssVariables.accent1Light,
+      accent2Light: cssVariables.accent2Light,
+      accent3Light: cssVariables.accent3Light,
     };
   }
   return {
     mainColor: cssVariables.mainColorInverse,
+    mainColorAlt: cssVariables.mainColorInverseAlt,
     mainColorInverse: cssVariables.mainColor,
-    accent1: cssVariables.accentInverse1,
-    accent2: cssVariables.accentInverse2,
-    accent3: cssVariables.accentInverse3,
-    accentInverse1: cssVariables.accent1,
-    accentInverse2: cssVariables.accent2,
-    accentInverse3: cssVariables.accent3,
+    mainColorInverseAlt: cssVariables.mainColorAlt,
+    accent1: cssVariables.accent1Light,
+    accent2: cssVariables.accent2Light,
+    accent3: cssVariables.accent3Light,
+    accent1Light: cssVariables.accent1,
+    accent2Light: cssVariables.accent2,
+    accent3Light: cssVariables.accent3,
   };
 };
 

@@ -7,13 +7,14 @@ export const Intro = () => {
         <div>
           <h1
             style={{
-              letterSpacing: '2rem',
-              textIndent: '2rem',
+              letterSpacing: '2.5rem',
               wordSpacing: '1rem',
               fontFamily: 'Lato, Inter, Avenir, Helvetica, Arial',
               fontWeight: 500,
-              fontSize: '5.25rem',
+              fontSize: 'min(6rem, 20vw)',
               marginTop: 0,
+              marginBottom: '2.5rem',
+              marginRight: '-2.5rem', // same as letter spacing
             }}
           >
             Lukas Popp
@@ -24,8 +25,9 @@ export const Intro = () => {
               wordSpacing: '0.8rem',
               fontFamily: 'Lato, Inter, Avenir, Helvetica, Arial',
               fontWeight: 'lighter',
-              fontSize: '2rem',
+              fontSize: 'min(2rem, 7vw)',
               margin: 0,
+              marginRight: '-0.8rem', // same as letter spacing
             }}
           >
             Graphics Software Engineer

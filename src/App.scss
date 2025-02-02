@@ -39,21 +39,19 @@
       width: 80vw;
     }
 
-    &.projects-cntnr {
-      background-color: variables.$main-color;
-
-      // TODO: Think about adding something before
-      // &::before {
-      //   content: '';
-      //   background-color: variables.$main-color;
-      //   position: relative;
-      //   top: -4.5rem;
-      //   border-top: 2px solid;
-      //   border-radius: 0.5rem 0.5rem 0 0;
-      //   width: 100vw;
-      //   height: 0.5rem;
-      // }
-    }
+    // TODO: Think about adding something before
+    // &.projects-cntnr {
+    // &::before {
+    //   content: '';
+    //   background-color: variables.$main-color;
+    //   position: relative;
+    //   top: -4.5rem;
+    //   border-top: 2px solid;
+    //   border-radius: 0.5rem 0.5rem 0 0;
+    //   width: 100vw;
+    //   height: 0.5rem;
+    // }
+    // }
 
     // &.socials-cntnr {
     //   min-height: 260px;
