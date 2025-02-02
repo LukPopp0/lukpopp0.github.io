@@ -1,13 +1,16 @@
-import { Canvas } from '@react-three/fiber';
+import { Canvas, context } from '@react-three/fiber';
 import { Lighting } from '../scene/lighting';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { VoronoiScene } from '../scene/voronoiScene';
 import { PerspectiveCamera as PCamera, Vector3 } from 'three';
-import { useEffect, useRef } from 'react';
-import { InnerCube } from '../scene/innerCube';
+import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '../../utils';
 
 export const ProjectsPage = () => {
   const cam = useRef<PCamera>(null);
+  const theme = useTheme();
+  const [autoRotate, setAutoRotate] = useState(true);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (!cam.current) return;
@@ -23,11 +26,11 @@ export const ProjectsPage = () => {
         position: 'relative',
       }}
     >
-      <Canvas>
+      <Canvas ref={canvasRef}>
+        <color attach="background" args={[theme.mainColor]} />
         <Lighting />
-        <PerspectiveCamera ref={cam} makeDefault position={[15, 30, -50]} />
-        <OrbitControls enableZoom={false} />
-        <InnerCube />
+        <PerspectiveCamera ref={cam} makeDefault position={[10, 20, -38]} />
+        <OrbitControls enableZoom={false} enablePan={false} autoRotate={autoRotate} />
         <VoronoiScene />
       </Canvas>
     </div>

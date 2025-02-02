@@ -1,5 +1,7 @@
-$main-color: #111111;
+$main-color: #1c1c22;
+$main-color-alt: #32323e;
 $main-color-inverse: #dedede;
+$main-color-inverse-alt: #ababab;
 $accent-1: #213547;
 $accent-2: #df4b44;
 $accent-3: #00a4e5;
@@ -12,13 +14,15 @@ $max-page-width: 1280px;
 
 :export {
   mainColor: $main-color;
+  mainColorAlt: $main-color-alt;
   mainColorInverse: $main-color-inverse;
+  mainColorInverseAlt: $main-color-inverse-alt;
   accent1: $accent-1;
   accent2: $accent-2;
   accent3: $accent-3;
-  accentInverse1: $accent-1-light;
-  accentInverse2: $accent-2-light;
-  accentInverse3: $accent-3-light;
+  accent1Light: $accent-1-light;
+  accent2Light: $accent-2-light;
+  accent3Light: $accent-3-light;
   minPageWidth: $min-page-width;
   maxPageWidth: $max-page-width;
 }
