@@ -1,4 +1,4 @@
-import { GroupProps } from '@react-three/fiber';
+import type { GroupProps } from '@react-three/fiber';
 import { animated, useSpring } from '@react-spring/three';
 import { useRef, useState } from 'react';
 import { Group, Vector3 } from 'three';

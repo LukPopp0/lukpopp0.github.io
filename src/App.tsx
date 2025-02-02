@@ -6,10 +6,7 @@ import { ProjectsPage } from './components/pageParts/projectsPage';
 import { Socials } from './components/pageParts/socials';
 import { HTMLAttributes, ReactElement } from 'react';
 
-const PagePart = ({
-  children,
-  ...props
-}: { children: ReactElement } & HTMLAttributes<HTMLDivElement>) => {
+const PagePart = ({ children, ...props }: { children: ReactElement } & HTMLAttributes<HTMLDivElement>) => {
   return (
     <div {...props} className={`page-part ${props.className}`}>
       {children}

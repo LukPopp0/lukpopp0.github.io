@@ -1,7 +1,6 @@
 import { useFrame, useThree } from '@react-three/fiber';
 import { InnerCube } from './innerCube';
 import { VoroPart } from './voroPart';
-import { Selection } from '@react-three/postprocessing';
 import { useTheme } from '../../utils';
 import partPositions from '../../assets/models/cellPositions.json' with { type: 'json' };
 import { useCallback, useRef, useState } from 'react';
@@ -58,23 +57,21 @@ export const VoronoiScene = () => {
 
   return (
     <>
-      <Selection>
-        <group ref={voroGroup}>
-          <InnerCube size={12.5} />
-          {voroFiles.map((f, i) => (
-            <VoroPart
-              url={f}
-              active={voroActive[i]}
-              inView={true}
-              key={i}
-              userData={{ partNr: i }}
-              position={new Vector3(partPositions[i][0], partPositions[i][1], partPositions[i][2])}
-            >
-              <meshStandardMaterial color={theme.mainColorInverse} />
-            </VoroPart>
-          ))}
-        </group>
-      </Selection>
+      <group ref={voroGroup}>
+        <InnerCube size={12.5} />
+        {voroFiles.map((f, i) => (
+          <VoroPart
+            url={f}
+            active={voroActive[i]}
+            inView={true}
+            key={i}
+            userData={{ partNr: i }}
+            position={new Vector3(partPositions[i][0], partPositions[i][1], partPositions[i][2])}
+          >
+            <meshStandardMaterial color={theme.mainColorInverse} />
+          </VoroPart>
+        ))}
+      </group>
     </>
   );
 };

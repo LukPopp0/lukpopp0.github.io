@@ -25,11 +25,7 @@ export const InnerCube = ({ size = 10 }: InnerCubeProps) => {
     <>
       <mesh name="innerCube">
         <boxGeometry args={[size * innerCubeSize, size * innerCubeSize, size * innerCubeSize]} />
-        <meshStandardMaterial
-          ref={mat}
-          color={new Color(1.0, 1.0, 1.0)}
-          emissive={new Color(1.0, 0.1, 0.1)}
-        />
+        <meshStandardMaterial ref={mat} color={new Color(1.0, 1.0, 1.0)} emissive={new Color(1.0, 0.1, 0.1)} />
       </mesh>
       <pointLight ref={pointLight} intensity={100} />
     </>
