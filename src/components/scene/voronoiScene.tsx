@@ -1,5 +1,4 @@
 import { useFrame, useThree } from '@react-three/fiber';
-import { InnerCube } from './innerCube';
 import { VoroPart } from './voroPart';
 import { useTheme } from '../../utils';
 import partPositions from '../../assets/models/cellPositions.json' with { type: 'json' };
@@ -49,7 +48,7 @@ export const VoronoiScene = () => {
       setHovering(true);
     } else {
       if (hovering) {
-        resetColors();
+        // resetColors();
         setVoroActive(new Array(14).fill(false));
         setHovering(false);
       }
@@ -71,7 +70,6 @@ export const VoronoiScene = () => {
 
   return (
     <group ref={voroGroup}>
-      <InnerCube size={12.5} />
       {voroFiles.map((f, i) => (
         <VoroPart
           url={f}
@@ -81,7 +79,7 @@ export const VoronoiScene = () => {
           userData={{ partNr: i }}
           position={new Vector3(partPositions[i][0], partPositions[i][1], partPositions[i][2])}
         >
-          <meshStandardMaterial color={theme.mainColorInverse} />
+          <meshStandardMaterial color={'#ffffff'} />
         </VoroPart>
       ))}
     </group>

@@ -6,6 +6,8 @@ type InnerCubeProps = {
   size?: number;
 };
 
+let hue = 0.0;
+
 export const InnerCube = ({ size = 10 }: InnerCubeProps) => {
   const mat = useRef<MeshStandardMaterial>(null);
   const pointLight = useRef<PointLight>(null);
@@ -13,12 +15,12 @@ export const InnerCube = ({ size = 10 }: InnerCubeProps) => {
 
   useFrame((_, delta) => {
     if (!mat.current) return;
-    const newColor = mat.current.emissive.getHSL({ h: 0, s: 0, l: 0 });
-    newColor.h += delta / 20;
-    mat.current.emissive.setHSL(newColor.h, newColor.s, newColor.l);
+    const prevColor = mat.current.emissive.getHSL({ h: 0, s: 0, l: 0 });
+    hue += delta / 20;
+    mat.current.emissive.setHSL(hue, prevColor.s, prevColor.l);
 
     if (!pointLight.current) return;
-    pointLight.current.color.setHSL(newColor.h, newColor.s, newColor.l);
+    pointLight.current.color.setHSL(hue, prevColor.s, prevColor.l);
   });
 
   return (
@@ -27,7 +29,7 @@ export const InnerCube = ({ size = 10 }: InnerCubeProps) => {
         <boxGeometry args={[size * innerCubeSize, size * innerCubeSize, size * innerCubeSize]} />
         <meshStandardMaterial ref={mat} color={new Color(1.0, 1.0, 1.0)} emissive={new Color(1.0, 0.1, 0.1)} />
       </mesh>
-      <pointLight ref={pointLight} intensity={100} />
+      <pointLight name="innerCubeLight" ref={pointLight} intensity={100} />
     </>
   );
 };

@@ -2,24 +2,26 @@ import { Canvas, useThree } from '@react-three/fiber';
 import { Lighting } from '../scene/lighting';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { VoronoiScene } from '../scene/voronoiScene';
-import { BackSide, PerspectiveCamera as PCamera, Vector3 } from 'three';
-import { useEffect, useRef, useState } from 'react';
+import { BackSide, NoToneMapping, Object3D, Vector3 } from 'three';
+import { useEffect, useState } from 'react';
 import { useTheme } from '../../utils';
-import { Bloom, EffectComposer, N8AO } from '@react-three/postprocessing';
+import { Bloom, EffectComposer, N8AO, SelectiveBloom } from '@react-three/postprocessing';
 import { isBrowser } from 'react-device-detect';
+import { InnerCube } from '../scene/innerCube';
 // import { Stats } from '@react-three/drei';
 
 const SkyBox = () => {
   const theme = useTheme();
   return (
     <mesh>
-      <boxGeometry args={[1000, 1000, 1000]} />
+      <sphereGeometry args={[500, 36, 36]} />
       <meshBasicMaterial color={theme.mainColor} side={BackSide} />
     </mesh>
   );
 };
 
 const Content = () => {
+  const { scene } = useThree();
   const theme = useTheme();
   const { camera } = useThree();
   const [autoRotate, setAutoRotate] = useState(true);
@@ -44,10 +46,19 @@ const Content = () => {
           autoRotate={autoRotate}
         />
       )}
+      <InnerCube size={12.5} />
       <VoronoiScene />
       <EffectComposer>
         <>
-          <Bloom luminanceThreshold={0} luminanceSmoothing={0.8} height={400} />
+          {/* // TODO: Selective Bloom sometimes shows a warning in the console */}
+          <SelectiveBloom
+            lights={[scene.getObjectByName('innerCubeLight') || new Object3D()]}
+            selection={[scene.getObjectByName('innerCube') || new Object3D()]}
+            intensity={0.75}
+            luminanceThreshold={0}
+            luminanceSmoothing={0.8}
+            height={400}
+          />
           {isBrowser && <N8AO halfRes color="black" aoRadius={2} intensity={1} aoSamples={6} denoiseSamples={4} />}
         </>
       </EffectComposer>
@@ -64,7 +75,11 @@ export const ProjectsPage = () => {
         position: 'relative',
       }}
     >
-      <Canvas>
+      <Canvas
+        onCreated={({ gl }) => {
+          gl.toneMapping = NoToneMapping;
+        }}
+      >
         <Content />
       </Canvas>
     </div>
