@@ -6,8 +6,8 @@ import { BackSide, PerspectiveCamera as PCamera, Vector3 } from 'three';
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '../../utils';
 import { Bloom, EffectComposer, N8AO } from '@react-three/postprocessing';
-import { Stats } from '@react-three/drei';
 import { isBrowser } from 'react-device-detect';
+// import { Stats } from '@react-three/drei';
 
 const SkyBox = () => {
   const theme = useTheme();
@@ -41,7 +41,7 @@ export const ProjectsPage = () => {
     >
       <Canvas ref={canvasRef}>
         <SkyBox />
-        <Stats />
+        {/* <Stats /> */}
         <color attach="background" args={[theme.mainColor]} />
         <Lighting />
         <PerspectiveCamera ref={cam} makeDefault position={[10, 20, -38]} />
