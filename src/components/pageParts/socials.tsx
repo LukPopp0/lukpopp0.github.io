@@ -18,10 +18,7 @@ export const Socials = () => {
         </MagicButton>
       </div>
       <div className="scl-icon-container">
-        <MagicButton
-          className="social-button linkedin"
-          href="https://www.linkedin.com/in/luk-popp/"
-        >
+        <MagicButton className="social-button linkedin" href="https://www.linkedin.com/in/luk-popp/">
           <img src={linkedinLogo} className="logo linkedin" alt="LinkedIn logo" />
         </MagicButton>
       </div>

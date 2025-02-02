@@ -1,4 +1,4 @@
-import { MeshProps } from '@react-three/fiber';
+import type { MeshProps } from '@react-three/fiber';
 import { useEffect, useState } from 'react';
 import { BufferGeometry } from 'three';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
