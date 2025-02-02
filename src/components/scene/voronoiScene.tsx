@@ -56,22 +56,20 @@ export const VoronoiScene = () => {
   });
 
   return (
-    <>
-      <group ref={voroGroup}>
-        <InnerCube size={12.5} />
-        {voroFiles.map((f, i) => (
-          <VoroPart
-            url={f}
-            active={voroActive[i]}
-            inView={true}
-            key={i}
-            userData={{ partNr: i }}
-            position={new Vector3(partPositions[i][0], partPositions[i][1], partPositions[i][2])}
-          >
-            <meshStandardMaterial color={theme.mainColorInverse} />
-          </VoroPart>
-        ))}
-      </group>
-    </>
+    <group ref={voroGroup}>
+      <InnerCube size={12.5} />
+      {voroFiles.map((f, i) => (
+        <VoroPart
+          url={f}
+          active={voroActive[i]}
+          inView={true}
+          key={i}
+          userData={{ partNr: i }}
+          position={new Vector3(partPositions[i][0], partPositions[i][1], partPositions[i][2])}
+        >
+          <meshStandardMaterial color={theme.mainColorInverse} />
+        </VoroPart>
+      ))}
+    </group>
   );
 };
