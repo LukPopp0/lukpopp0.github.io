@@ -5,7 +5,7 @@ import { useTheme } from '../../utils';
 import partPositions from '../../assets/models/cellPositions.json' with { type: 'json' };
 import { useCallback, useRef, useState } from 'react';
 import { Group, Mesh, MeshStandardMaterial, Vector3 } from 'three';
-
+THIS SHOULD MAKE THE BUILD FAIL
 const voroFiles = new Array(14)
   .fill('')
   .map((_, i) => new URL(`../../assets/models/voronoi-${i}.stl`, import.meta.url).href);
