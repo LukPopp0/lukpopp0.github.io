@@ -59,7 +59,6 @@ const Content = () => {
             luminanceSmoothing={0.8}
             height={400}
           />
-          {isBrowser && <N8AO halfRes color="black" aoRadius={2} intensity={1} aoSamples={6} denoiseSamples={4} />}
         </>
       </EffectComposer>
     </>
