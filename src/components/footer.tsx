@@ -1,10 +1,12 @@
+import { isMobile } from 'react-device-detect';
+
 export const Footer = () => {
   return (
     <footer
       style={{
-        position: 'fixed',
+        position: 'absolute',
         width: '100%',
-        bottom: '0',
+        bottom: isMobile ? '2em' : '0',
         left: '0',
         fontSize: '10pt',
         height: '4em',

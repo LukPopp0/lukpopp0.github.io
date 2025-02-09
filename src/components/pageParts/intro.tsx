@@ -3,7 +3,7 @@ import { MysticBlur } from '../mysticBlur';
 export const Intro = () => {
   return (
     <>
-      <div className="intro" style={{ alignContent: 'center', justifyItems: 'center' }}>
+      <div className="intro" style={{ alignContent: 'center', justifyItems: 'center', userSelect: 'none' }}>
         <div>
           <h1
             style={{

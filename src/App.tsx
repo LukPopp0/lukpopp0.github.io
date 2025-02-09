@@ -4,35 +4,52 @@ import { ThemeProvider } from './utils';
 import { Intro } from './components/pageParts/intro';
 import { ProjectsPage } from './components/pageParts/projectsPage';
 import { Socials } from './components/pageParts/socials';
-import { HTMLAttributes, ReactElement } from 'react';
+import { HTMLAttributes, ReactElement, useEffect, useRef, useState } from 'react';
+import { PageScroller } from './components/pageParts/pageScroller';
 
 const PagePart = ({ children, ...props }: { children: ReactElement } & HTMLAttributes<HTMLDivElement>) => {
+  const [innerHeight, setInnerHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const updateInnerHeight = () => {
+      setInnerHeight(window.innerHeight);
+    };
+
+    window.addEventListener('resize', updateInnerHeight);
+    return () => {
+      window.removeEventListener('resize', updateInnerHeight);
+    };
+  }, []);
+
   return (
-    <div {...props} className={`page-part ${props.className}`}>
+    <div {...props} style={{ height: innerHeight, ...props.style }} className={`page-part ${props.className}`}>
       {children}
     </div>
   );
 };
 
-const App = () => {
+export const App = () => {
+  const mainRef = useRef<HTMLDivElement>(null);
   return (
     <div className="App">
       <ThemeProvider>
-        <div className="main">
-          <PagePart className="intro-cntnr">
-            <Intro />
-          </PagePart>
-          <PagePart className="projects-cntnr">
-            <ProjectsPage />
-          </PagePart>
-          <PagePart className="socials-cntnr">
-            <Socials />
-          </PagePart>
+        <div ref={mainRef} className="main">
+          <PageScroller scrollRef={mainRef}>
+            <PagePart className="intro-cntnr">
+              <Intro />
+            </PagePart>
+            <PagePart className="projects-cntnr">
+              <ProjectsPage />
+            </PagePart>
+            <PagePart className="socials-cntnr">
+              <>
+                <Socials />
+                <Footer />
+              </>
+            </PagePart>
+          </PageScroller>
         </div>
-        <Footer />
       </ThemeProvider>
     </div>
   );
 };
-
-export default App;

@@ -1,14 +1,14 @@
 import { Canvas, useThree } from '@react-three/fiber';
 import { Lighting } from '../scene/lighting';
-import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { OrbitControls, PerspectiveCamera, Stats } from '@react-three/drei';
 import { VoronoiScene } from '../scene/voronoiScene';
-import { BackSide, NoToneMapping, Object3D, Vector3 } from 'three';
-import { useEffect, useState } from 'react';
+import { BackSide, NoToneMapping, Vector3 } from 'three';
+import { useEffect } from 'react';
 import { useTheme } from '../../utils';
-import { Bloom, EffectComposer, N8AO, SelectiveBloom } from '@react-three/postprocessing';
+// import { Bloom, EffectComposer, N8AO, SelectiveBloom } from '@react-three/postprocessing';
 import { isBrowser } from 'react-device-detect';
 import { InnerCube } from '../scene/innerCube';
-// import { Stats } from '@react-three/drei';
+import { useMainStore } from '../../utils/store';
 
 const SkyBox = () => {
   const theme = useTheme();
@@ -21,10 +21,12 @@ const SkyBox = () => {
 };
 
 const Content = () => {
-  const { scene } = useThree();
+  // const { scene } = useThree();
+  const debug = useMainStore(s => s.debug);
+  const rotateCube = useMainStore(s => s.rotateCube);
+  const showBloom = useMainStore(s => s.showBloom);
   const theme = useTheme();
   const { camera } = useThree();
-  const [autoRotate, setAutoRotate] = useState(true);
 
   useEffect(() => {
     camera.lookAt(new Vector3(0, 0, 0));
@@ -33,34 +35,31 @@ const Content = () => {
   return (
     <>
       <SkyBox />
-      {/* <Stats /> */}
+      {debug && <Stats />}
       <color attach="background" args={[theme.mainColor]} />
       <Lighting />
       <PerspectiveCamera makeDefault position={isBrowser ? [10, 20, 38] : [15, 30, 57]} />
-      {isBrowser && (
-        <OrbitControls
-          enabled={true}
-          enableRotate={isBrowser}
-          enableZoom={false}
-          enablePan={false}
-          autoRotate={autoRotate}
-        />
-      )}
+      {/* {isBrowser && ( */}
+      <OrbitControls enabled={true} enableRotate={true} enableZoom={false} enablePan={false} autoRotate={rotateCube} />
+      {/* )} */}
       <InnerCube size={12.5} />
       <VoronoiScene />
-      <EffectComposer>
-        <>
-          {/* // TODO: Selective Bloom sometimes shows a warning in the console */}
-          <SelectiveBloom
-            lights={[scene.getObjectByName('innerCubeLight') || new Object3D()]}
-            selection={[scene.getObjectByName('innerCube') || new Object3D()]}
-            intensity={0.75}
-            luminanceThreshold={0}
-            luminanceSmoothing={0.8}
-            height={400}
-          />
-        </>
-      </EffectComposer>
+      {showBloom && (
+        <></>
+        // <EffectComposer>
+        //   <>
+        //     <SelectiveBloom
+        //       lights={[scene.getObjectByName('innerCubeLight') || new Object3D()]}
+        //       selection={[scene.getObjectByName('innerCube') || new Object3D()]}
+        //       intensity={10.75}
+        //       luminanceThreshold={0.25}
+        //       luminanceSmoothing={0}
+        //       height={400}
+        //       kernelSize={KernelSize.SMALL}
+        //     />
+        //   </>
+        // </EffectComposer>
+      )}
     </>
   );
 };

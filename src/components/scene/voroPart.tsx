@@ -15,7 +15,7 @@ export const VoroPart = ({
   children,
   ...props
 }: { url: string; active: boolean; inView: boolean } & GroupProps) => {
-  const group = useRef<Group>(null);
+  const animGroup = useRef<Group>(null);
   const [clicked, setClicked] = useState(false);
   const positionClone: Vector3 = typeof initPosition === 'object' ? (initPosition as Vector3).clone() : new Vector3();
   const { position } = useSpring<{ position: [number, number, number] }>({
@@ -32,7 +32,7 @@ export const VoroPart = ({
   });
 
   return (
-    <animated.group ref={group} position={position} {...props} onClick={() => setClicked(!clicked)}>
+    <animated.group ref={animGroup} position={position} {...props} onClick={() => setClicked(!clicked)}>
       <UrlMesh url={url} userData={{ type: 'voro-part', url }}>
         {children}
       </UrlMesh>
