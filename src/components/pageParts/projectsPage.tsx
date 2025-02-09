@@ -25,6 +25,7 @@ const Content = () => {
   const debug = useMainStore(s => s.debug);
   const rotateCube = useMainStore(s => s.rotateCube);
   const showBloom = useMainStore(s => s.showBloom);
+  const targetPageNr = useMainStore(s => s.targetPageNr);
   const theme = useTheme();
   const { camera } = useThree();
 
@@ -39,9 +40,13 @@ const Content = () => {
       <color attach="background" args={[theme.mainColor]} />
       <Lighting />
       <PerspectiveCamera makeDefault position={isBrowser ? [10, 20, 38] : [15, 30, 57]} />
-      {/* {isBrowser && ( */}
-      <OrbitControls enabled={true} enableRotate={true} enableZoom={false} enablePan={false} autoRotate={rotateCube} />
-      {/* )} */}
+      <OrbitControls
+        enabled={targetPageNr === 1}
+        enableRotate={true}
+        enableZoom={false}
+        enablePan={false}
+        autoRotate={rotateCube}
+      />
       <InnerCube size={12.5} />
       <VoronoiScene />
       {showBloom && (
@@ -74,6 +79,7 @@ export const ProjectsPage = () => {
       }}
     >
       <Canvas
+        frameloop="demand"
         onCreated={({ gl }) => {
           gl.toneMapping = NoToneMapping;
         }}

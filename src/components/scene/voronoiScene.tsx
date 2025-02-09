@@ -61,7 +61,7 @@ export const VoronoiScene = () => {
         setHovering(false);
       }
     }
-  });
+  }, -1);
 
   // useEffect(() => {
   //   // TODO: Find a better way to get the element
