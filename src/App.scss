@@ -22,30 +22,28 @@
   align-items: center;
   min-width: variables.$min-page-width;
 
-  // For snap scrolling
-  scroll-snap-type: y mandatory;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  height: 100svh;
-
   .page-part {
+    position: relative;
     width: 100vw;
     min-height: 100vh;
     min-height: 100svh;
-    padding: 4rem 0rem;
+    height: 100vh;
+    height: 100svh;
+    padding: 0rem 0rem;
     display: flex;
     flex-wrap: wrap;
     justify-items: center;
     justify-content: center;
     align-content: center;
 
-    // For snap scrolling
-    scroll-snap-align: start;
-
     &.intro-cntnr,
     &.socials-cntnr {
       max-width: variables.$max-page-width;
       width: 80vw;
+    }
+
+    &.projects-cntnr {
+      padding: 0;
     }
 
     // TODO: Think about adding something before
