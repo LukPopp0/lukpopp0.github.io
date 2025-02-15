@@ -21,6 +21,7 @@
   flex-direction: column;
   align-items: center;
   min-width: variables.$min-page-width;
+  overflow: hidden;
 
   .page-part {
     position: relative;

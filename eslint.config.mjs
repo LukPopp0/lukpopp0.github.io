@@ -107,6 +107,7 @@ export default [
           printWidth: 120,
         },
       ],
+      'import/no-unresolved': ['error', { ignore: ['\\.svg\\?react$'] }],
     },
   },
 ];
