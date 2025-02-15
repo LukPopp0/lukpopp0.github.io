@@ -1,10 +1,13 @@
-import { ReactNode, RefObject, useEffect } from 'react';
+import { ReactNode, RefObject, useEffect, useState } from 'react';
 import { useMainStore } from '../../utils/store';
+import DownArrow from '../../assets/images/arrow-down.svg?react';
+import './pageScroller.scss';
+import { isMobile } from 'react-device-detect';
 
 let prevTouch: [number, number] | undefined;
 // Debounce time based on personal preference
 const wheelDebounceTimeoutTime = 1400;
-let wheelDebounceTimeout: number | undefined = undefined;
+let wheelDebounceTimeout: NodeJS.Timeout | undefined = undefined;
 let lastWheelEvent = Number.MAX_VALUE;
 let lastWheelDelta = 0;
 
@@ -23,6 +26,12 @@ const getCurrentPage = (epsilon = 0.1) => {
 export const PageScroller = ({ scrollRef, children }: { scrollRef: RefObject<HTMLElement>; children: ReactNode }) => {
   const targetPageNr = useMainStore(s => s.targetPageNr);
   const setTargetPageNr = useMainStore(s => s.setTargetPageNr);
+  const [maxPage, setMaxPage] = useState(0);
+
+  useEffect(() => {
+    if (!scrollRef.current) return;
+    setMaxPage(Math.round(scrollRef.current.getBoundingClientRect().height / window.innerHeight) - 1);
+  }, [scrollRef]);
 
   // One page scroll effect
   useEffect(() => {
@@ -30,7 +39,6 @@ export const PageScroller = ({ scrollRef, children }: { scrollRef: RefObject<HTM
       if (!scrollRef.current) return;
 
       const currentPage = getCurrentPage();
-      const maxPage = Math.round(scrollRef.current.getBoundingClientRect().height / window.innerHeight) - 1;
       if (scrollDown) {
         setTargetPageNr(Math.min(maxPage, currentPage + 1));
       } else {
@@ -41,7 +49,7 @@ export const PageScroller = ({ scrollRef, children }: { scrollRef: RefObject<HTM
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
 
-      // Don't bother when not scrolling down
+      // Don't bother when scrolling only sideways
       if (e.deltaY === 0) return;
 
       // In general: Debounce wheel events for a certain amount of time to avoid scrolling multiple pages at once.
@@ -109,11 +117,30 @@ export const PageScroller = ({ scrollRef, children }: { scrollRef: RefObject<HTM
       window.removeEventListener('touchend', endTouch);
       window.removeEventListener('resize', handleResize);
     };
-  }, [scrollRef, setTargetPageNr]);
+  }, [scrollRef, setTargetPageNr, maxPage]);
 
   useEffect(() => {
     if (!scrollRef.current) return;
     scrollRef.current.children[targetPageNr].scrollIntoView({ block: 'start', behavior: 'smooth' });
   }, [targetPageNr, scrollRef]);
-  return <>{children}</>;
+
+  const onButtonDown = () => {
+    if (!scrollRef.current) return;
+
+    if (targetPageNr === maxPage) setTargetPageNr(0);
+    else setTargetPageNr(targetPageNr + 1);
+  };
+
+  return (
+    <>
+      {children}
+      <div
+        style={{ position: 'fixed', bottom: isMobile ? '5rem' : '3rem', left: '50%', transform: 'translateX(-50%)' }}
+      >
+        <button className={`scroll-btn ${targetPageNr < maxPage ? 'scroll-down' : 'scroll-up'}`} onClick={onButtonDown}>
+          <DownArrow />
+        </button>
+      </div>
+    </>
+  );
 };
