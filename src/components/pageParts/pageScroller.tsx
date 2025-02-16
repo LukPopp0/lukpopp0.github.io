@@ -26,7 +26,7 @@ const getCurrentPage = (epsilon = 0.1) => {
 export const PageScroller = ({ scrollRef, children }: { scrollRef: RefObject<HTMLElement>; children: ReactNode }) => {
   const targetPageNr = useMainStore(s => s.targetPageNr);
   const setTargetPageNr = useMainStore(s => s.setTargetPageNr);
-  const [maxPage, setMaxPage] = useState(0);
+  const [maxPage, setMaxPage] = useState(2);
 
   useEffect(() => {
     if (!scrollRef.current) return;
