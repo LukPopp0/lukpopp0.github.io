@@ -84,6 +84,11 @@ button.scroll-btn {
       transform: scaleY(-1);
       top: -0.66em;
       filter: drop-shadow(0 -0.5em 0em variables.$main-color-inverse-alt);
+
+      // Firefox doesn't scale the drop-shadow
+      @-moz-document url-prefix() {
+        -webkit-filter: drop-shadow(0 0.5em 0em variables.$main-color-inverse-alt);
+      }
     }
 
     // For mobile browsers
@@ -91,6 +96,11 @@ button.scroll-btn {
       svg {
         filter: drop-shadow(0 -0.4em 0em variables.$main-color-inverse-alt);
         transform: scale(1.25, -1.25);
+
+        // Firefox doesn't scale the drop-shadow
+        @-moz-document url-prefix() {
+          -webkit-filter: drop-shadow(0 0.4em 0em variables.$main-color-inverse-alt);
+        }
 
         path {
           stroke-width: calc(1rem / 1.25) !important;
@@ -103,6 +113,11 @@ button.scroll-btn {
         svg {
           filter: drop-shadow(0 -0.4em 0em variables.$main-color-inverse-alt);
           transform: scale(1.25, -1.25);
+
+          // Firefox doesn't scale the drop-shadow
+          @-moz-document url-prefix() {
+            -webkit-filter: drop-shadow(0 0.4em 0em variables.$main-color-inverse-alt);
+          }
 
           path {
             stroke-width: calc(1rem / 1.25) !important;
